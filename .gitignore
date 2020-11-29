@@ -13,6 +13,6 @@
 # or these folders
 !img
 !_posts
-!_img/*
+!img/*
 !_posts/*
 

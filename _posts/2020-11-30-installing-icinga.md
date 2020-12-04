@@ -5,7 +5,7 @@ title: Distributed Monitoring with Icinga2 - Part 2
 category: Guide
 tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
-# Part 2 --- Installing Icinga
+# Part 2 --- Installing Icinga2
 [Part 1 --- Setting up our Icinga Lab]()
 
 ## Summary
@@ -64,7 +64,7 @@ systemctl start icinga2
 Since I setup my hosts to have my SSH keys, I can use my SSH agent to quickly repeat this task on the satellites.
 
 ```
-[root@picnicbasket ~]# SCRIPT=$(echo 'apt-get -y install apt-transport-https wget gnupg; wget -O - https://packages.icinga.com/icinga.key | apt-key add -; . /etc/os-release; if [ ! -z ${UBUNTU_CODENAME+x} ]; then DIST="${UBUNTU_CODENAME}"; else DIST="$(lsb_release -c| awk '{print $2}')"; fi; echo "deb https://packages.icinga.com/ubuntu icinga-${DIST} main" > /etc/apt/sources.list.d/${DIST}-icinga.list; echo "deb-src https://packages.icinga.com/ubuntu icinga-${DIST} main" >> /etc/apt/sources.list.d/${DIST}-icinga.list; apt-get update -y; apt install icinga2 monitoring-plugins -y; systemctl enable icinga2; systemctl start icinga2')
+[root@picnicbasket ~]# SCRIPT=$(echo 'apt-get -y install apt-transport-https wget gnupg; wget -O - https://packages.icinga.com/icinga.key | apt-key add -; . /etc/os-release; if [ ! -z ${UBUNTU_CODENAME+x} ]; then DIST="${UBUNTU_CODENAME}"; else DIST="$(lsb_release -c| awk '{print $2}')"; fi; echo "deb https://packages.icinga.com/ubuntu icinga-${DIST} main" > /etc/apt/sources.list.d/${DIST}-icinga.list; echo "deb-src https://packages.icinga.com/ubuntu icinga-${DIST} main" >> /etc/apt/sources.list.d/${DIST}-icinga.list; apt-get update -y; apt install icinga2 monitoring-plugins -y; systemctl enable icinga2; systemctl restart icinga2')
 [root@picnicbasket ~]# cat icingahosts | grep Satellite
 Site-A-Satellite
 Site-B-Satellite
@@ -72,11 +72,18 @@ Site-C-Satellite
 [root@picnicbasket ~]# for host in $(cat icingahosts | grep Satellite); do ssh root@$host "$SCRIPT"; done
 ```
 
-
-
+Confirmed Working!
+```
+[root@picnicbasket ~]# for host in $(cat icingahosts | grep -iv host); do ssh root@$host "systemctl status icinga2 | grep Active"; done
+   Active: active (running) since Thu 2020-12-03 18:25:23 UTC; 54s ago
+   Active: active (running) since Thu 2020-12-03 18:25:26 UTC; 53s ago
+   Active: active (running) since Thu 2020-12-03 18:25:28 UTC; 52s ago
+   Active: active (running) since Thu 2020-12-03 18:25:31 UTC; 50s ago
+```
 
 ## Resources Used
 https://icinga.com/docs/icinga2/latest/doc/02-installation/
 https://computingforgeeks.com/how-to-install-icinga2-monitoring-tool-on-ubuntu-18-04-lts/
+https://www.howtoforge.com/how-to-install-icinga-2-monitoring-on-ubuntu-1804/
 
 ## Special Mentions

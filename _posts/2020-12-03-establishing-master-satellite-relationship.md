@@ -5,9 +5,11 @@ title: Distributed Monitoring with Icinga2 - Part 4
 category: Guide
 tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
-# Part 4 --- Establishing the Master Satellite Relationship
+# Establishing the Master Satellite Relationship
 [Part 1 --- Setting up our Icinga2 Lab]()
+
 [Part 2 --- Installing Icinga2]()
+
 [Part 3 --- Installing IcingaWeb2]()
 
 ## Summary

@@ -5,7 +5,7 @@ title: Distributed Monitoring with Icinga2 - Part 2
 category: Guide
 tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
-# Part 2 --- Installing Icinga2
+# Installing Icinga2
 [Part 1 --- Setting up our Icinga Lab]()
 
 ## Summary

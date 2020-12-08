@@ -12,7 +12,7 @@ tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 
 [Part 3 --- Installing IcingaWeb2]()
 
-## Summary
+## Introduction
 Up to this point we have not done anything more than get Icinga2 and its web UI installed. In part four of our guide we will begin setting up our Master Satellite relationship. I expect this to be the most tricky part as it is not something can be done with [Icinga Director]() but instead has to be done manually. At the time of writing this, I have not started done this road yet but I am going to operate under the assumption that I should not install Director until after I have established the relationship properly. That way the Kickstarter pulls in the right configuration.
 
 **Since this guide will be just as much a journey, I will be showing any mistakes I made and how I troubleshooted them.**

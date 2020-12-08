@@ -8,13 +8,19 @@ tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 # Installing Icinga2
 [Part 1 --- Setting up our Icinga Lab]()
 
-## Summary
+## Introduction
 In part two of our adventure down the Icinga rabbit hole we will now get our Icinga Endpoints installed. For Master this will mean we need to install Icinga and Icinga Web. For the Satellites we will only be installing Icinga. The client endpoints will not need anything further installed on them yet. Later on in this guide we will spin up Apache and a Windows host to test monitoring HTTP and WinRM services.
 
 **Since this guide will be just as much a journey, I will be showing any mistakes I made and how I troubleshooted them.**
 
 ## Installation Process
 The first thing that we are going to want to do is to take a snapshot of our VM. In case anything goes wrong we are going to want a fallback. Once we get this first Icinga endpoint installed and documented, the rest will be a lot easier. Let's start on IcingaMaster.
+
+Since we are going to be dealing with the configuration files a lot, let's first get `icinga-vim` installed. This will give us syntax highlighting for our Icinga .conf files. I will be using this [handy dandy code](https://gist.github.com/okv/2b0d9b6c1c73c036cabc) from Github user `okv` to get this setup.
+```
+apt install vim-icinga2 -y
+PREFIX=~/.vim && mkdir -p $PREFIX/{syntax,ftdetect} && curl https://raw.githubusercontent.com/Icinga/icinga2/ec75e7dcbbf8c5650197a82107969936220707c8/tools/syntax/vim/syntax/icinga2.vim > $PREFIX/syntax/icinga2.vim && curl https://raw.githubusercontent.com/Icinga/icinga2/ec75e7dcbbf8c5650197a82107969936220707c8/tools/syntax/vim/ftdetect/icinga2.vim > $PREFIX/ftdetect/icinga2.vim
+```
 
 According to the official documentation the following code will install Icinga2 onto our endpoint.
 
@@ -85,5 +91,6 @@ Confirmed Working!
 https://icinga.com/docs/icinga2/latest/doc/02-installation/
 https://computingforgeeks.com/how-to-install-icinga2-monitoring-tool-on-ubuntu-18-04-lts/
 https://www.howtoforge.com/how-to-install-icinga-2-monitoring-on-ubuntu-1804/
+https://gist.github.com/okv/2b0d9b6c1c73c036cabc
 
 ## Special Mentions

@@ -10,7 +10,7 @@ tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 
 [Part 2 --- Installing Icinga2]()
 
-## Summary
+## Introduction
 Now that we have Icinga2 installed on our Master and Satellites we setup IcingaWeb2 on Master. Since the Satellites exist so as to do remote checks on our client endpoints, they will not need the web server installed on them.
 
 **Since this guide will be just as much a journey, I will be showing any mistakes I made and how I troubleshooted them.**

@@ -7,7 +7,7 @@ tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
 # Setting up our Icinga2 Lab
 
-## Summary
+## Introduction
 I was recently tasked with building out distributed monitoring for our infrastructure that spanned two physical sites and AWS. We decided to go with Icinga2 since that seemed to be the agreed upon best choice. During my time setting this up I found many instances of the documentation missing key steps and or being incorrect. Hopefully this guide will help others like me who are brand new to Icinga2 and need help getting started. In this first part we will setup our simulated multi-site environment. I am doing all of this off of my homelab R720 server. I gave each host, except the master, 50gb of storage, 2gb of RAM, and 2 CPUs. I gave the master 8gb of RAM and 4 CPUs since it has to handle a backend database. We will be placing the master in Site-B to simulate it being in AWS. Since the master server does not do any checks itself, we will also need a satellite in Site-B to monitor our host.
 
 ## Terminology

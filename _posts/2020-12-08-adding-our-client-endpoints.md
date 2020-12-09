@@ -241,6 +241,265 @@ The service is still up despite it not being up prior. It looks like Director ju
 
 Note that the two Director deployments we are comparing are the one that was made when we fixed the host template to have the correct endpoint, and the most recent commit. Given that it is working I am going to leave it alone for now. I will circle back to this if it becomes an issue again.
 
+## Adding the Remaining Hosts
+
+Now that we have our first host in, the remaining hosts should be easy and straight forward. Lets add them in.
+
+![](../img/2020-12-08-adding-our-client-endpoints-7cfac.png)
+
+![](../img/2020-12-08-adding-our-client-endpoints-a31fb.png)
+
+Note that for the service set I did not make a new service set for each site. Since I did not set any zone specific settings for the service sets, I am testing to see if I need a service template for each site in the same way that I need a host template for each site.
+
+Now we deploy our changes and see what happens.
+
+![](../img/2020-12-08-adding-our-client-endpoints-bf6e4.png)
+
+![](../img/2020-12-08-adding-our-client-endpoints-59afa.png)
+
+![](../img/2020-12-08-adding-our-client-endpoints-7a0f4.png)
+
+![](../img/2020-12-08-adding-our-client-endpoints-f9868.png)
+
+Alright i'll bite, where the hell did these configuration files go? Notice how the only template that we have not used, the windows one, is the only one that remains? Yet, all the ones that we have used keep going away. Why? If we refer back to the troubleshooting section, there can only be two locations where this information is at, `/var/lib/icinga2/api/` and `/etc/icinga2/`. We can use grep to find out if and where the string `Site-C-Satellite.picnicsecurity.com` is located in these directories.
+
+```
+root@IcingaMaster:/var/lib/icinga2/api# grep -rin 'Site-C-Satellite.picnicsecurity.com' .
+./zones/director-global/director/host_templates.conf:18:    command_endpoint = "Site-C-Satellite.picnicsecurity.com"
+./zones/master/_etc/hosts.conf:14:object Host "Site-C-Satellite.picnicsecurity.com" {
+./packages/director/fb035f76-9399-4e75-8b6f-98266592802b/zones.d/director-global/host_templates.conf:18:    command_endpoint = "Site-C-Satellite.picnicsecurity.com"
+root@IcingaMaster:/var/lib/icinga2/api# cd /etc/icinga2/
+
+root@IcingaMaster:/etc/icinga2# grep -rin 'Site-C-Satellite.picnicsecurity.com' .
+./zones.conf:41:object Endpoint "Site-C-Satellite.picnicsecurity.com" {
+./zones.conf:46:        endpoints = [ "Site-C-Satellite.picnicsecurity.com" ]
+./zones.d/master/hosts.conf:14:object Host "Site-C-Satellite.picnicsecurity.com" {
+
+  root@IcingaMaster:/var/lib/icinga2/api# cat -n zones/director-global/director/host_templates.conf
+       1  template Host "SiteA-Linux-Basic-Host" {
+       2      check_command = "hostalive"
+       3      command_endpoint = "Site-A-Satellite.picnicsecurity.com"
+       4  }
+       5
+       6  template Host "SiteA-Window-Basic-Host" {
+       7      check_command = "hostalive"
+       8      command_endpoint = "Site-A-Satellite.picnicsecurity.com"
+       9  }
+      10
+      11  template Host "SiteB-Linux-Basic-Host" {
+      12      check_command = "hostalive"
+      13      command_endpoint = "Site-B-Satellite.picnicsecurity.com"
+      14  }
+      15
+      16  template Host "SiteC-Linux-Basic-Host" {
+      17      check_command = "hostalive"
+      18      command_endpoint = "Site-C-Satellite.picnicsecurity.com"
+      19  }
+      20
+```
+
+It is weird that it is showing the file as being this and yet in the above screenshot from Director it is showing the file differently. Unfortunately I do not have time to dive deeper into this so I will have to do the despicable thing and _leave this as an exercise for the reader_.
+
+Going back to our dashboard we will see the following.
+
+![](../img/2020-12-08-adding-our-client-endpoints-2273b.png)
+
+Let's begin another round of troubleshooting
+
+## Troubleshooting
+
+We will repeat our methodology from above by first confirming that the `hostalive` is being performed by the right satellite and then that the service check is also being done by the right satellite
+
+![](../img/2020-12-08-adding-our-client-endpoints-ad52a.png)
+
+![](../img/2020-12-08-adding-our-client-endpoints-a6037.png)
+
+Once again the services are being checked by IcingaMaster and not by the Satellites. We cannot change the `cluster zone` as it may break our working Site-A-Host-01. This means that our next step would instead be to create an SSH check for the SiteB zone. We will also make note that commit `577337a` was when we added all of the remaining hosts and this issue started. It will serve as our baseline comparison.
+
+![](../img/2020-12-08-adding-our-client-endpoints-65ce8.png)
+
+![](../img/2020-12-08-adding-our-client-endpoints-ee095.png)
+
+![](../img/2020-12-08-adding-our-client-endpoints-df8e2.png)
+
+This did not fix the issue. I am going to reboot the server to see if that helps flush any issue. This did not help. We can verify that we have a proper API connection using the following curl command.
+
+```
+root@IcingaMaster:~# read PASS
+
+root@IcingaMaster:~# echo $PASS
+DirectorAPIPassword123!
+root@IcingaMaster:~# curl -k -s -u director:$PASS https://Site-A-Satellite.picnicsecurity.com:5665/v1
+<html><head><title>Icinga 2</title></head><h1>Hello from Icinga 2 (Version: r2.12.2-1)!</h1><p>You are authenticated as <b>director</b>. Your user has the following permissions:</p> <ul><li>*</li></ul><p>More information about API requests is available in the <a href="https://icinga.com/docs/icinga2/latest/" target="_blank">documentation</a>.</p></html>
+
+root@IcingaMaster:~# curl -k -s -u director:$PASS https://Site-B-Satellite.picnicsecurity.com:5665/v1
+<html><head><title>Icinga 2</title></head><h1>Hello from Icinga 2 (Version: r2.12.2-1)!</h1><p>You are authenticated as <b>director</b>. Your user has the following permissions:</p> <ul><li>*</li></ul><p>More information about API requests is available in the <a href="https://icinga.com/docs/icinga2/latest/" target="_blank">documentation</a>.</p></html>
+
+root@IcingaMaster:~# curl -k -s -u director:$PASS https://Site-C-Satellite.picnicsecurity.com:5665/v1
+<html><head><title>Icinga 2</title></head><h1>Hello from Icinga 2 (Version: r2.12.2-1)!</h1><p>You are authenticated as <b>director</b>. Your user has the following permissions:</p> <ul><li>*</li></ul><p>More information about API requests is available in the <a href="https://icinga.com/docs/icinga2/latest/" target="_blank">documentation</a>.</p></html>
+```
+
+Director can communicate via the API to all of our satellites so it should be able to push configuration changes to each. I am going to focus in on Site B for now. Let's dive into its the directory structure. More importantly let's compare it to Site A.
+
+```
+root@Site-B-Satellite:/var/lib/icinga2/api# tree
+.
+├── log
+│   ├── 1607359467
+│   ├── 1607360968
+│   ├── 1607364055
+│   ├── 1607364699
+│   ├── 1607366092
+│   ├── 1607367697
+│   ├── 1607368130
+│   ├── 1607368519
+│   ├── 1607368968
+│   ├── 1607369668
+│   ├── 1607370574
+│   ├── 1607432891
+│   ├── 1607435235
+│   ├── 1607437674
+│   ├── 1607437725
+│   ├── 1607437929
+│   └── current
+├── packages
+│   └── _api
+│       ├── active.conf
+│       ├── active-stage
+│       ├── bfae29c5-4f18-4f0a-90d4-99ff6de22ce5
+│       │   ├── conf.d
+│       │   │   └── downtimes
+│       │   ├── include.conf
+│       │   └── zones.d
+│       └── include.conf
+├── repository
+├── zones
+│   ├── director-global
+│   │   └── director
+│   │       ├── 001-director-basics.conf
+│   │       ├── host_templates.conf
+│   │       ├── servicesets.conf
+│   │       └── service_templates.conf
+│   └── Site-B
+│       └── director
+│           ├── service_apply.conf
+│           └── service_templates.conf
+└── zones-stage
+    ├── director-global
+    │   └── director
+    │       ├── 001-director-basics.conf
+    │       ├── host_templates.conf
+    │       ├── servicesets.conf
+    │       └── service_templates.conf
+    └── Site-B
+        └── director
+            ├── service_apply.conf
+            └── service_templates.conf
+
+18 directories, 33 files
+```
+
+```
+root@Site-A-Satellite:/var/lib/icinga2/api# tree
+.
+├── log
+│   └── current
+├── packages
+│   └── _api
+│       ├── 9935623f-701a-4a38-a515-1f2044b95778
+│       │   ├── conf.d
+│       │   │   └── downtimes
+│       │   ├── include.conf
+│       │   └── zones.d
+│       ├── active.conf
+│       ├── active-stage
+│       └── include.conf
+├── repository
+├── zones
+│   ├── director-global
+│   │   └── director
+│   │       ├── 001-director-basics.conf
+│   │       ├── host_templates.conf
+│   │       ├── servicesets.conf
+│   │       └── service_templates.conf
+│   └── Site-A
+│       └── director
+│           └── hosts.conf
+└── zones-stage
+    ├── director-global
+    │   └── director
+    │       ├── 001-director-basics.conf
+    │       ├── host_templates.conf
+    │       ├── servicesets.conf
+    │       └── service_templates.conf
+    └── Site-A
+        └── director
+            └── hosts.conf
+
+18 directories, 15 files
+```
+
+After examining these files I decided it would be best to go back and make service templates, service sets, and host templates for each site.
+
+![](../img/2020-12-08-adding-our-client-endpoints-58cd4.png)
+
+After giving it a couple of minutes to propagate the changes across the satellites, this was my dashboard.
+
+![](../img/2020-12-08-adding-our-client-endpoints-ed411.png)
+
+We are still getting errors.
+
+![](../img/2020-12-08-adding-our-client-endpoints-62f7f.png)
+
+What's weird here is the fact that Site-A-Host-01 and Site-A-Host-02 are configured exactly the same and yet are having different results.
+
+changed the cluster zone on all services back to please choose
+https://icinga.com/docs/icinga-2/latest/doc/15-troubleshooting/
+ran icinga2 daemon -C on site a and master
+confirmed the version was correct and the same
+checked which features were enabled on both
+made sure log duration was 1 week and then reran kickstart
+added director back as the api user on the satellites
+reran the icinga2 daemon -C command on A and master
+now that we have generated what should be configuration changes onto the satellites I am going to check log on master and site a
+I did not see anything that stood out as bad
+I triple checked to confirm my firewall rules
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

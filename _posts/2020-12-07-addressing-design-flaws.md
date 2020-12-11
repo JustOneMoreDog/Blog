@@ -29,6 +29,7 @@ Before we move on to installing Director I wanted to take a moment to address so
 
 ## Adding a New Satellite post Director Install
 
+<br>
 ## Resources Used
 
 

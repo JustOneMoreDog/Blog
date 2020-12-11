@@ -585,16 +585,16 @@ systemctl restart icinga2
 # Add the director API user to each satellite endpoint in the Web UI
 ```
 
-
+<br>
 ## Resources Used
-https://icinga.com/docs/icinga-director/latest/
-https://icinga.com/docs/icinga-director/latest/doc/02-Installation/
-https://github.com/Icinga/icingaweb2-module-director/blob/master/doc/02-Installation.md
-https://github.com/Icinga/icingaweb2-module-incubator
-https://github.com/Icinga/icingaweb2-module-ipl
-https://github.com/Icinga/icingaweb2-module-reactbundle
-https://icinga.com/blog/2020/07/10/icinga-2-icinga-web-2-and-director-kickstart-on-centos-7/
-https://icinga.com/docs/icinga-director/latest/doc/75-Background-Daemon/
+(https://icinga.com/docs/icinga-director/latest/)[https://icinga.com/docs/icinga-director/latest/]  
+(https://icinga.com/docs/icinga-director/latest/doc/02-Installation/)[https://icinga.com/docs/icinga-director/latest/doc/02-Installation/]  
+(https://github.com/Icinga/icingaweb2-module-director/blob/master/doc/02-Installation.md)[https://github.com/Icinga/icingaweb2-module-director/blob/master/doc/02-Installation.md]  
+(https://github.com/Icinga/icingaweb2-module-incubator)[https://github.com/Icinga/icingaweb2-module-incubator]  
+(https://github.com/Icinga/icingaweb2-module-ipl)[https://github.com/Icinga/icingaweb2-module-ipl]  
+(https://github.com/Icinga/icingaweb2-module-reactbundle)[https://github.com/Icinga/icingaweb2-module-reactbundle]  
+(https://icinga.com/blog/2020/07/10/icinga-2-icinga-web-2-and-director-kickstart-on-centos-7/)[https://icinga.com/blog/2020/07/10/icinga-2-icinga-web-2-and-director-kickstart-on-centos-7/]  
+(https://icinga.com/docs/icinga-director/latest/doc/75-Background-Daemon/)[https://icinga.com/docs/icinga-director/latest/doc/75-Background-Daemon/]  
 
 ## Special Mentions
 Roland Sommer and William van Beek on the Icinga community forms as they provided the critical information I needed to succeeded.

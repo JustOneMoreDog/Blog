@@ -542,12 +542,12 @@ And on our Web UI we can see
 
 Most Excellent!!
 
-
+<br>
 ## Resources Used
-https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#master-setup
-https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#agentsatellite-setup
-https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#top-down
-https://community.icinga.com/t/understanding-log-duration/1679
+(https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#master-setup)[https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#master-setup]  
+(https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#agentsatellite-setup)[https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#agentsatellite-setup]  
+(https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#top-down)[https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#top-down]  
+(https://community.icinga.com/t/understanding-log-duration/1679)[https://community.icinga.com/t/understanding-log-duration/1679]  
 
 ## Special Mentions
 Roland Sommer and William van Beek on the Icinga community forms as they provided the critical information I needed to succeeded.

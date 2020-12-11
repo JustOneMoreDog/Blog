@@ -138,11 +138,11 @@ IcingaAdminPassword123!
 #### Enabling SSL for IcingaWeb2
 _to do_
 
-
+<br>
 ## Resources Used
-https://icinga.com/docs/icinga2/latest/doc/02-installation/
-https://computingforgeeks.com/how-to-install-icinga2-monitoring-tool-on-ubuntu-18-04-lts/
-https://www.howtoforge.com/how-to-install-icinga-2-monitoring-on-ubuntu-1804/
-https://www.php.net/manual/en/timezones.php
+(https://icinga.com/docs/icinga2/latest/doc/02-installation/)[https://icinga.com/docs/icinga2/latest/doc/02-installation/]  
+(https://computingforgeeks.com/how-to-install-icinga2-monitoring-tool-on-ubuntu-18-04-lts/)[https://computingforgeeks.com/how-to-install-icinga2-monitoring-tool-on-ubuntu-18-04-lts/]  
+(https://www.howtoforge.com/how-to-install-icinga-2-monitoring-on-ubuntu-1804/)[https://www.howtoforge.com/how-to-install-icinga-2-monitoring-on-ubuntu-1804/]  
+(https://www.php.net/manual/en/timezones.php/)[https://www.php.net/manual/en/timezones.php/]  
 
 ## Special Mentions

@@ -499,12 +499,13 @@ Confirm everything is working as intended!
 
 ![](/img/2020-12-08-adding-our-client-endpoints-93907.png)
 
+<br>
 ## Resources Used
-https://icinga.com/docs/icinga-2/latest/doc/15-troubleshooting/  
-https://icinga.com/docs/icinga-director/latest/doc/24-Working-with-agents/#create-agent-based-services  
-https://community.icinga.com/t/director-not-pushing-correct-configuration-to-satellites/6254/12  
-https://github.com/Icinga/icingaweb2-module-director/pull/1817  
-https://github.com/Icinga/icingaweb2-module-director/issues/2250  
+(https://icinga.com/docs/icinga-2/latest/doc/15-troubleshooting/  )[https://icinga.com/docs/icinga-2/latest/doc/15-troubleshooting/  ]  
+(https://icinga.com/docs/icinga-director/latest/doc/24-Working-with-agents/#create-agent-based-services  )[https://icinga.com/docs/icinga-director/latest/doc/24-Working-with-agents/#create-agent-based-services  ]  
+(https://community.icinga.com/t/director-not-pushing-correct-configuration-to-satellites/6254/12  )[https://community.icinga.com/t/director-not-pushing-correct-configuration-to-satellites/6254/12  ]  
+(https://github.com/Icinga/icingaweb2-module-director/pull/1817  )[https://github.com/Icinga/icingaweb2-module-director/pull/1817  ]  
+(https://github.com/Icinga/icingaweb2-module-director/issues/2250 )[https://github.com/Icinga/icingaweb2-module-director/issues/2250 ]  
 
 ## Special Mentions
 Roland Sommer and William van Beek on the Icinga community forms as they provided the critical information I needed to succeeded.

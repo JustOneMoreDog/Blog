@@ -5,12 +5,16 @@ title: Distributed Monitoring with Icinga2 - Part 4
 category: Guide
 tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
+[Part 01 --- Setting up our Icinga2 Lab]()  
+[Part 02 --- Installing Icinga2]()  
+[Part 03 --- Installing IcingaWeb2]()  
+[Part 04 --- Establishing the Master Satellite Relationship]()  
+[Part 05 --- Addressing Design Flaws]()  
+[Part 06 --- Installing Icinga2 Director]()
+[Part 07 --- Adding Client Endpoints]()  
+[Part 23 --- Summary]()   
+
 # Establishing the Master Satellite Relationship
-[Part 1 --- Setting up our Icinga2 Lab]()
-
-[Part 2 --- Installing Icinga2]()
-
-[Part 3 --- Installing IcingaWeb2]()
 
 ## Introduction
 Up to this point we have not done anything more than get Icinga2 and its web UI installed. In part four of our guide we will begin setting up our Master Satellite relationship. I expect this to be the most tricky part as it is not something can be done with [Icinga Director]() but instead has to be done manually. At the time of writing this, I have not started done this road yet but I am going to operate under the assumption that I should not install Director until after I have established the relationship properly. That way the Kickstarter pulls in the right configuration.
@@ -200,7 +204,7 @@ Excellent. Now to repeat the above steps on the remaining satellites and thanks 
 
 ## Configuring the Top Down Command Endpoint
 
-This is what everything has lead up to. The reason I will be doing a Top Down Command Endpoint configuration is because I have no plans to install the Icinga2 daemon on any of my client endpoints. All I need is to have the Satellite endpoints do remote checks on my client endpoints (ssh/ping/winrm/http).
+This is where our goal starts to come in play. The reason I will be doing a Top Down Command Endpoint configuration is because I have no plans to install the Icinga2 daemon on any of my client endpoints currently. All I need is to have the Satellite endpoints do remote checks on my client endpoints (ssh/ping/winrm/http).
 
 The first thing I need to do is include the endpoint and zone configuration on both the Master and the Satellites.
 ```
@@ -387,7 +391,7 @@ object Host "Site-A-Satellite.picnicsecurity.com" {
 
 We can use `icinga2 daemon -C` to verify our config and then restart our icinga service. Now would be a good time to take a look at our dashboard and see if what we are doing is having the impact we desire.
 
-![](../img/2020-12-03-establishing-master-satellite-relationship-115db.png)
+![](/img/2020-12-03-establishing-master-satellite-relationship-115db.png)
 
 All lights green! In this screenshot you can see that our Satellite is passing the ping check. `Check Source` is showing `IcingaMaster.picnicsecurity.com` which means that our IcingaMaster is doing the ping check which is what we want. We can also see that our `vars.agent_endpoint` custom variable is set as `Site-A-Satellite.picnicsecurity.com` which is again what we want. We will see the impact of this custom variable down the line.
 
@@ -534,7 +538,7 @@ Dec 04 20:32:10 IcingaMaster systemd[1]: Started Icinga host/service/network mon
 
 And on our Web UI we can see
 
-![](../img/2020-12-03-establishing-master-satellite-relationship-1d33a.png)
+![](/img/2020-12-03-establishing-master-satellite-relationship-1d33a.png)
 
 Most Excellent!!
 
@@ -546,3 +550,4 @@ https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#top-down
 https://community.icinga.com/t/understanding-log-duration/1679
 
 ## Special Mentions
+Roland Sommer and William van Beek on the Icinga community forms as they provided the critical information I needed to succeeded.

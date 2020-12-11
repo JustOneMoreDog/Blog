@@ -5,10 +5,16 @@ title: Distributed Monitoring with Icinga2 - Part 3
 category: Guide
 tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
-# Installing IcingaWeb2
-[Part 1 --- Setting up our Icinga2 Lab]()
+[Part 01 --- Setting up our Icinga2 Lab]()  
+[Part 02 --- Installing Icinga2]()  
+[Part 03 --- Installing IcingaWeb2]()  
+[Part 04 --- Establishing the Master Satellite Relationship]()  
+[Part 05 --- Addressing Design Flaws]()  
+[Part 06 --- Installing Icinga2 Director]()
+[Part 07 --- Adding Client Endpoints]()  
+[Part 23 --- Summary]()  
 
-[Part 2 --- Installing Icinga2]()
+# Installing IcingaWeb2
 
 ## Introduction
 Now that we have Icinga2 installed on our Master and Satellites we setup IcingaWeb2 on Master. Since the Satellites exist so as to do remote checks on our client endpoints, they will not need the web server installed on them.
@@ -29,7 +35,7 @@ systemctl enable --now mysql
 
 Now we go through the secure installation and configuration with `mysql_secure_installation`
 
-![](../img/2020-12-01-installing-icinga-web-11e92.png)
+![](/img/2020-12-01-installing-icinga-web-11e92.png)
 We used `MySQLRoot123!` for MySQL root password here. Make sure that your passwords are much more secure than this and stored in a safe place. I am noting the password here so that you know which passwords end up getting used where.
 
 Now that MySQL has been given a secure baseline we can move on to setting up Icinga2 to use the MySQL database. To do this we need to install the 'IDO Module' for Icinga2.
@@ -38,11 +44,11 @@ Now that MySQL has been given a secure baseline we can move on to setting up Ici
 apt install icinga2-ido-mysql -y
 ```
 
-![](../img/2020-12-01-installing-icinga-web-58508.png)
-![](../img/2020-12-01-installing-icinga-web-d7810.png)
+![](/img/2020-12-01-installing-icinga-web-58508.png)
+![](/img/2020-12-01-installing-icinga-web-d7810.png)
 We will be using `Icinga2IDODB!` for the password here. Make sure that your passwords are much more secure than this and stored in a safe place. I am noting the password here so that you know which passwords end up getting used where.
-![](../img/2020-12-01-installing-icinga-web-676ac.png)
-![](../img/2020-12-01-installing-icinga-web-88d3d.png)
+![](/img/2020-12-01-installing-icinga-web-676ac.png)
+![](/img/2020-12-01-installing-icinga-web-88d3d.png)
 
 Now we enable the feature and restart Icinga2
 ```
@@ -71,7 +77,7 @@ You can find a list of PHP's supported Timezones [here](https://www.php.net/manu
 
 Next we will configure a new database for IcingaWeb2 called `icingaweb2` and give the user `icingaweb2` with password `IcingaWeb2DB!` permissions for the database
 
-![](../img/2020-12-01-installing-icinga-web-5323d.png)
+![](/img/2020-12-01-installing-icinga-web-5323d.png)
 
 ```
 mysql -u root -p
@@ -93,40 +99,40 @@ Now it is time to open a browser and configure the WebUI.
 http://10.50.0.10/icingaweb2/setup
 ```
 
-![](../img/2020-12-01-installing-icinga-web-a5bff.png)
+![](/img/2020-12-01-installing-icinga-web-a5bff.png)
 
 Paste in the setup token you generated moments ago
 
-![](../img/2020-12-01-installing-icinga-web-83b29.png)
+![](/img/2020-12-01-installing-icinga-web-83b29.png)
 
-![](../img/2020-12-01-installing-icinga-web-016ce.png)
+![](/img/2020-12-01-installing-icinga-web-016ce.png)
 
 Make sure everything except the PostgreSQL is green before continuing. If anything is not green then make sure to go back over the previous steps and ensure you did not skip anything
 
-![](../img/2020-12-01-installing-icinga-web-57012.png) 2560 1440p
+![](/img/2020-12-01-installing-icinga-web-57012.png) 2560 1440p
 
 We will be using the database for authentication here. Later on down the road we can set it up so that we use Active Directory (or LDAP) for authentication. However, since I am not a cool kid with AD in his homelab, database authentication will have to do.
 
-![](../img/2020-12-01-installing-icinga-web-07b4d.png)
+![](/img/2020-12-01-installing-icinga-web-07b4d.png)
 
 We will be using the `icingaweb2`/`IcingaWeb2DB!` credentials here. After validating our configuration we can go on to the next step
 
 
-![](../img/2020-12-01-installing-icinga-web-aa1ad.png)
-![](../img/2020-12-01-installing-icinga-web-d63ea.png)
-![](../img/2020-12-01-installing-icinga-web-25cb8.png)
-![](../img/2020-12-01-installing-icinga-web-12f59.png)
-![](../img/2020-12-01-installing-icinga-web-6a9f7.png)
-![](../img/2020-12-01-installing-icinga-web-714b5.png)
-![](../img/2020-12-01-installing-icinga-web-b6506.png)
+![](/img/2020-12-01-installing-icinga-web-aa1ad.png)
+![](/img/2020-12-01-installing-icinga-web-d63ea.png)
+![](/img/2020-12-01-installing-icinga-web-25cb8.png)
+![](/img/2020-12-01-installing-icinga-web-12f59.png)
+![](/img/2020-12-01-installing-icinga-web-6a9f7.png)
+![](/img/2020-12-01-installing-icinga-web-714b5.png)
+![](/img/2020-12-01-installing-icinga-web-b6506.png)
 Icinga2IDODB!
-![](../img/2020-12-01-installing-icinga-web-ba795.png)
-![](../img/2020-12-01-installing-icinga-web-40aa7.png)
-![](../img/2020-12-01-installing-icinga-web-e9d81.png)
-![](../img/2020-12-01-installing-icinga-web-1c42e.png)
-![](../img/2020-12-01-installing-icinga-web-2a7cd.png)
+![](/img/2020-12-01-installing-icinga-web-ba795.png)
+![](/img/2020-12-01-installing-icinga-web-40aa7.png)
+![](/img/2020-12-01-installing-icinga-web-e9d81.png)
+![](/img/2020-12-01-installing-icinga-web-1c42e.png)
+![](/img/2020-12-01-installing-icinga-web-2a7cd.png)
 IcingaAdminPassword123!
-![](../img/2020-12-01-installing-icinga-web-7aa5e.png)
+![](/img/2020-12-01-installing-icinga-web-7aa5e.png)
 
 
 #### Enabling SSL for IcingaWeb2

@@ -5,19 +5,19 @@ title: Distributed Monitoring with Icinga2 - Part 6
 category: Guide
 tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
+[Part 01 --- Setting up our Icinga2 Lab]()  
+[Part 02 --- Installing Icinga2]()  
+[Part 03 --- Installing IcingaWeb2]()  
+[Part 04 --- Establishing the Master Satellite Relationship]()  
+[Part 05 --- Addressing Design Flaws]()  
+[Part 06 --- Installing Icinga2 Director]()
+[Part 07 --- Adding Client Endpoints]()  
+[Part 23 --- Summary]()  
+
 # Installing Icinga Director
-[Part 1 --- Setting up our Icinga2 Lab]()
-
-[Part 2 --- Installing Icinga2]()
-
-[Part 3 --- Installing IcingaWeb2]()
-
-[Part 4 --- Establishing the Master Satellite Relationship]()
-
-[Part 5 --- Addressing Design Flaws]()
 
 ## Introduction
-[Icinga Director](https://icinga.com/docs/icinga-director/latest/) is a tool that will make adding hosts to be monitored a breeze. We can create pre-defined templates for each type of host that we have in our network and then add hosts with that template. If you have a bunch of Linux servers that all need to have SSH and Ping checked then you could make a template that imports the SSH and Ping checks and then apply that template to those Linux servers. It helps keep us in the GUI rather than the CLI. However, as with a majority of tools that bring the CLI to a GUI, Director has limitations. All the manual setup and configuration we have done up to this point is because Director couldn't do it. Director will import our existing configuration using the Kickstart process. We also use this process to investigate how we would import an Satellite. This will ensure our distributed monitoring solution is scalable. See part four, [Addressing Design Flaws](), for more details on that.
+[Icinga Director](https://icinga.com/docs/icinga-director/latest/) is a tool that will make adding hosts to be monitored a breeze. We can create pre-defined templates for each type of host that we have in our network and then add hosts with that template. If you have a bunch of Linux servers that all need to have SSH and Ping checked then you could make a template that imports the SSH and Ping checks and then apply that template to those Linux servers. It helps keep us in the GUI rather than the CLI. However, as with a majority of tools that bring the CLI to a GUI, Director has limitations. All the manual setup and configuration we have done up to this point is because Director couldn't do it. Director will import our existing configuration using the Kickstart process. We also use this process to investigate how we would import a new Satellite. This will ensure our distributed monitoring solution is scalable. See part four, [Addressing Design Flaws](), for more details on that.
 
 First things first. We need to take a snapshot of our Master and Satellites and then consolidate their disks. I have not deleted any snapshots up until now and I do not plan on deleting these snapshots until this is fully complete. Afterwards we can start the installation process.
 
@@ -61,19 +61,19 @@ Bye
 
 Make note of the password you use for the director user as we will need it later. In my case this is `DirectorDBPass123!`. Next we will need to login to the Web UI with the `icingaadmin`/`IcingaAdminPassword123!` credentials.
 
-![](../img/2020-12-07-installing-icinga-director-67fbb.png)
+![](/img/2020-12-07-installing-icinga-director-67fbb.png)
 
 We are going to create a new database resource and have it point to the Director database that we just configured. First we go to `Configuration -> Application -> Resources` and click on `Create a New Resource`.
 
-![](../img/2020-12-07-installing-icinga-director-aaf98.png)
+![](/img/2020-12-07-installing-icinga-director-aaf98.png)
 
 Now we fill out the fields using the same information we provided to MySQL above.
 
-![](../img/2020-12-07-installing-icinga-director-f7136.png)
+![](/img/2020-12-07-installing-icinga-director-f7136.png)
 
 After validating the configuration hit save changes.
 
-![](../img/2020-12-07-installing-icinga-director-3b219.png)
+![](/img/2020-12-07-installing-icinga-director-3b219.png)
 
 Next we will grab the latest tarball release of Director and put it into our modules directory. Their documentation on their Github page provides a useful series of commands for us to run. We are going to modify these commands so that anyone coming after us will always get the latest version. We can achieve this with some bashfoo.
 
@@ -265,15 +265,15 @@ root@IcingaMaster:/usr/share/icingaweb2/modules# systemctl restart icinga2
 
 Now that we have Director installed, our next step is to run the kickstart wizard. The hope here is that it will retain our [Top Down Command Endpoint]() configuration. Let's log back into our Web UI and see what we have.
 
-![](../img/2020-12-07-installing-icinga-director-15ae4.png)   
+![](/img/2020-12-07-installing-icinga-director-15ae4.png)   
 
-![](../img/2020-12-07-installing-icinga-director-e9e5b.png)
+![](/img/2020-12-07-installing-icinga-director-e9e5b.png)
 Before we can do the kickstart wizard we need to select our `director_db` resource that we made earlier as our database.
 
 **Before we continue I am going to create another snapshot of our Master and Satellites just to be safe**
 
 Next we will create the schema
-![](../img/2020-12-07-installing-icinga-director-5a0a2.png)
+![](/img/2020-12-07-installing-icinga-director-5a0a2.png)
 
 It looks like we need to get the API user setup. To do this we visit IcingaMaster and see where `api-users.conf` is located at.
 
@@ -345,16 +345,16 @@ root@IcingaMaster:/etc/icinga2# systemctl restart icinga2
 
 We have now configured Icinga to have an API user called `director` that has the password `DirectorAPIPassword123!` and all the permissions. We can now add this information to the kickstart wizard.
 
-![](../img/2020-12-07-installing-icinga-director-c5fdf.png)
+![](/img/2020-12-07-installing-icinga-director-c5fdf.png)
 
 Once it finishes with its import, we see the following.
-![](../img/2020-12-07-installing-icinga-director-59c0e.png)
+![](/img/2020-12-07-installing-icinga-director-59c0e.png)
 
 Looks like we have a whole bunch of yellow which is better than red but worse than green. Checking in on the health tab we see the following.
-![](../img/2020-12-07-installing-icinga-director-61109.png)
+![](/img/2020-12-07-installing-icinga-director-61109.png)
 
 It would appear that it is unhappy about the 247 changes that the kickstart wizard made but did not deploy. Before we deploy those changes let us also check the Daemon tab.
-![](../img/2020-12-07-installing-icinga-director-0682e.png)
+![](/img/2020-12-07-installing-icinga-director-0682e.png)
 
 It would seem that we need to get the Director background daemon running. In order to do this we are fire going to need to make a user for it.
 
@@ -373,11 +373,11 @@ systemctl enable icinga-director.service
 systemctl start icinga-director.service
 ```
 
-![](../img/2020-12-07-installing-icinga-director-cc076.png)
+![](/img/2020-12-07-installing-icinga-director-cc076.png)
 
 Now we will go into the `Activity Log` and deploy all of our changes.
 
-![](../img/2020-12-07-installing-icinga-director-c4a78.png)
+![](/img/2020-12-07-installing-icinga-director-c4a78.png)
 
 Excellent.
 
@@ -385,11 +385,11 @@ Excellent.
 
 We need to verify that our Top Down Command Endpoint Configuration from part four is still in place and that it got imported by the kickstart wizard correctly. If we go into `Icinga Director -> Icinga Infrastructure` we should see that we already have zones and endpoints configured.
 
-![](../img/2020-12-07-installing-icinga-director-5efff.png)
+![](/img/2020-12-07-installing-icinga-director-5efff.png)
 
-![](../img/2020-12-07-installing-icinga-director-ad592.png)
+![](/img/2020-12-07-installing-icinga-director-ad592.png)
 
-![](../img/2020-12-07-installing-icinga-director-7c78e.png)
+![](/img/2020-12-07-installing-icinga-director-7c78e.png)
 
 Next if we click on one of our satellites we will see that it does not have an API user defined. Let's add that in now.
 
@@ -455,13 +455,13 @@ root@Site-A-Satellite:/etc/icinga2# systemctl restart icinga2
 
 Now we can go back into the Web UI to test our changes.
 
-![](../img/2020-12-07-installing-icinga-director-b8be7.png)
+![](/img/2020-12-07-installing-icinga-director-b8be7.png)
 
-![](../img/2020-12-07-installing-icinga-director-dd92c.png)
+![](/img/2020-12-07-installing-icinga-director-dd92c.png)
 
 To confirm that the API connection is established we can click on the `Inspect` tab
 
-![](../img/2020-12-07-installing-icinga-director-eaa3a.png)
+![](/img/2020-12-07-installing-icinga-director-eaa3a.png)
 
 Let's repeat these steps for our remaining Satellites.
 
@@ -478,7 +478,7 @@ echo 'include "zones.d/api-users.conf"' >> /etc/icinga2/icinga2.conf
 systemctl restart icinga2
 ```
 
-![](../img/2020-12-07-installing-icinga-director-14e2a.png)
+![](/img/2020-12-07-installing-icinga-director-14e2a.png)
 
 Everything appears to be in order. Excellent!
 
@@ -510,6 +510,16 @@ icingacli module enable "${MODULE_NAME}"
 
 MODULE_NAME=ipl
 MODULE_VERSION=v0.5.0
+MODULES_PATH="/usr/share/icingaweb2/modules"
+MODULE_PATH="${MODULES_PATH}/${MODULE_NAME}"
+RELEASES="https://github.com/Icinga/icingaweb2-module-${MODULE_NAME}/archive"
+mkdir "$MODULE_PATH" \
+&& wget -q $RELEASES/${MODULE_VERSION}.tar.gz -O - \
+   | tar xfz - -C "$MODULE_PATH" --strip-components 1
+icingacli module enable "${MODULE_NAME}"
+
+MODULE_NAME=incubator
+MODULE_VERSION=v0.6.0
 MODULES_PATH="/usr/share/icingaweb2/modules"
 MODULE_PATH="${MODULES_PATH}/${MODULE_NAME}"
 RELEASES="https://github.com/Icinga/icingaweb2-module-${MODULE_NAME}/archive"
@@ -587,3 +597,4 @@ https://icinga.com/blog/2020/07/10/icinga-2-icinga-web-2-and-director-kickstart-
 https://icinga.com/docs/icinga-director/latest/doc/75-Background-Daemon/
 
 ## Special Mentions
+Roland Sommer and William van Beek on the Icinga community forms as they provided the critical information I needed to succeeded.

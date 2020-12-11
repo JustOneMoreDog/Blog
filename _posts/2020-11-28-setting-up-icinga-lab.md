@@ -5,19 +5,19 @@ title: Distributed Monitoring with Icinga2 - Part 1
 category: Guide
 tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
-[Part 01 --- Setting up our Icinga2 Lab]()  
-[Part 02 --- Installing Icinga2]()  
-[Part 03 --- Installing IcingaWeb2]()  
-[Part 04 --- Establishing the Master Satellite Relationship]()  
-[Part 05 --- Addressing Design Flaws]()  
-[Part 06 --- Installing Icinga2 Director]()
-[Part 07 --- Adding Client Endpoints]()  
-[Part 23 --- Summary]()   
+[Part 01 --- Setting up our Icinga2 Lab](/guide/2020/11/28/setting-up-icinga-lab.html)     
+[Part 02 --- Installing Icinga2](/guide/2020/11/30/installing-icinga.html)     
+[Part 03 --- Installing IcingaWeb2](/guide/2020/12/01/installing-icinga-web.html)      
+[Part 04 --- Establishing the Master Satellite Relationship](/guide/2020/12/03/establishing-master-satellite-relationship.html)     
+[Part 05 --- Addressing Design Flaws](/guide/2020/12/07/addressing-design-flaws.html)    
+[Part 06 --- Installing Icinga2 Director](/guide/2020/12/07/installing-icinga-director.html)  
+[Part 07 --- Adding Client Endpoints](guide/2020/12/08/adding-our-client-endpoints.html)    
+[Part 23 --- Summary](/guide/2020/12/11/icinga2-journey-summary.html)     
 
 # Setting up our Icinga2 Lab
 
 ## Introduction
-I was recently tasked with building out distributed monitoring for our infrastructure that spanned two physical sites and AWS. We decided to go with Icinga2 since that seemed to be the agreed upon best choice. During my time setting this up I found many instances of the documentation missing key steps and or being incorrect. The documentation felt more like a reminder or reference guide for those that have already had experience with Icinga2. Hopefully this guide will help others like me who are brand new to Icinga2 and need help getting started. In this first part we will setup our simulated multi-site environment. I am doing all of this off of my home lab R720 server. I gave each host, except the master, 50gb of storage, 2gb of RAM, and 2 CPUs. I gave the master 8gb of RAM and 4 CPUs since it has to handle a backend database. We will be placing the master in Site-B to simulate it being in AWS. Since the master server does not do any checks itself, we will also need a satellite in Site-B to monitor our host.
+I was recently tasked with building out distributed monitoring for our infrastructure that spanned two physical sites and AWS. We decided to go with Icinga2 since that seemed to be the agreed upon best choice. The documentation felt more like a reminder or reference guide for those that have already had experience with Icinga2. Hopefully this guide will help others like me who are brand new to Icinga2 and need help getting started. In this first part we will setup our simulated multi-site environment. I am doing all of this off of my home lab R720 server. I gave each host, except the master, 50gb of storage, 2gb of RAM, and 2 CPUs. I gave the master 8gb of RAM and 4 CPUs since it has to handle a backend database. We will be placing the master in Site-B to simulate it being in AWS. Since the master server does not do any checks itself, we will also need a satellite in Site-B to monitor our host.
 
 ## Goal
 During this journey I will working towards getting distributed monitoring. Specifically, I will be trying to setup what the documentation calls [Top Down Command Endpoint](https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#top-down-command-endpoint). I will have one master server that will be run the web frontend and three satellites, one for each site, that the master will communicate with. I want the satellites to run remote HTTP, WinRM, SSH, and ping checks on the hosts that are in their respective zones and then report back to the master which will display the results on the frontend.
@@ -90,6 +90,7 @@ Its important to draw out your environment and plan out how you want to setup yo
 #### Site C
 ![](/img/2020-11-28-setting-up-naigos-989b2.png)
 
+<br>
 ## Resources Used
 ESXI 6.7 Hypervisor
 

@@ -5,14 +5,14 @@ title: Distributed Monitoring with Icinga2 - Part 6
 category: Guide
 tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
-[Part 01 --- Setting up our Icinga2 Lab]()  
-[Part 02 --- Installing Icinga2]()  
-[Part 03 --- Installing IcingaWeb2]()  
-[Part 04 --- Establishing the Master Satellite Relationship]()  
-[Part 05 --- Addressing Design Flaws]()  
-[Part 06 --- Installing Icinga2 Director]()
-[Part 07 --- Adding Client Endpoints]()  
-[Part 23 --- Summary]()  
+[Part 01 --- Setting up our Icinga2 Lab](/guide/2020/11/28/setting-up-icinga-lab.html)     
+[Part 02 --- Installing Icinga2](/guide/2020/11/30/installing-icinga.html)     
+[Part 03 --- Installing IcingaWeb2](/guide/2020/12/01/installing-icinga-web.html)      
+[Part 04 --- Establishing the Master Satellite Relationship](/guide/2020/12/03/establishing-master-satellite-relationship.html)     
+[Part 05 --- Addressing Design Flaws](/guide/2020/12/07/addressing-design-flaws.html)    
+[Part 06 --- Installing Icinga2 Director](/guide/2020/12/07/installing-icinga-director.html)  
+[Part 07 --- Adding Client Endpoints](guide/2020/12/08/adding-our-client-endpoints.html)    
+[Part 23 --- Summary](/guide/2020/12/11/icinga2-journey-summary.html)     
 
 # Installing Icinga Director
 
@@ -585,16 +585,16 @@ systemctl restart icinga2
 # Add the director API user to each satellite endpoint in the Web UI
 ```
 
-
+<br>
 ## Resources Used
-https://icinga.com/docs/icinga-director/latest/
-https://icinga.com/docs/icinga-director/latest/doc/02-Installation/
-https://github.com/Icinga/icingaweb2-module-director/blob/master/doc/02-Installation.md
-https://github.com/Icinga/icingaweb2-module-incubator
-https://github.com/Icinga/icingaweb2-module-ipl
-https://github.com/Icinga/icingaweb2-module-reactbundle
-https://icinga.com/blog/2020/07/10/icinga-2-icinga-web-2-and-director-kickstart-on-centos-7/
-https://icinga.com/docs/icinga-director/latest/doc/75-Background-Daemon/
+(https://icinga.com/docs/icinga-director/latest/)[https://icinga.com/docs/icinga-director/latest/]  
+(https://icinga.com/docs/icinga-director/latest/doc/02-Installation/)[https://icinga.com/docs/icinga-director/latest/doc/02-Installation/]  
+(https://github.com/Icinga/icingaweb2-module-director/blob/master/doc/02-Installation.md)[https://github.com/Icinga/icingaweb2-module-director/blob/master/doc/02-Installation.md]  
+(https://github.com/Icinga/icingaweb2-module-incubator)[https://github.com/Icinga/icingaweb2-module-incubator]  
+(https://github.com/Icinga/icingaweb2-module-ipl)[https://github.com/Icinga/icingaweb2-module-ipl]  
+(https://github.com/Icinga/icingaweb2-module-reactbundle)[https://github.com/Icinga/icingaweb2-module-reactbundle]  
+(https://icinga.com/blog/2020/07/10/icinga-2-icinga-web-2-and-director-kickstart-on-centos-7/)[https://icinga.com/blog/2020/07/10/icinga-2-icinga-web-2-and-director-kickstart-on-centos-7/]  
+(https://icinga.com/docs/icinga-director/latest/doc/75-Background-Daemon/)[https://icinga.com/docs/icinga-director/latest/doc/75-Background-Daemon/]  
 
 ## Special Mentions
 Roland Sommer and William van Beek on the Icinga community forms as they provided the critical information I needed to succeeded.

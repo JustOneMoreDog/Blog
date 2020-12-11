@@ -5,14 +5,14 @@ title: Distributed Monitoring with Icinga2 - Part 4
 category: Guide
 tags: [ 'director', 'icinga2', 'guide', 'distributed', 'monitoring' ]
 ---
-[Part 01 --- Setting up our Icinga2 Lab]()  
-[Part 02 --- Installing Icinga2]()  
-[Part 03 --- Installing IcingaWeb2]()  
-[Part 04 --- Establishing the Master Satellite Relationship]()  
-[Part 05 --- Addressing Design Flaws]()  
-[Part 06 --- Installing Icinga2 Director]()
-[Part 07 --- Adding Client Endpoints]()  
-[Part 23 --- Summary]()   
+[Part 01 --- Setting up our Icinga2 Lab](/guide/2020/11/28/setting-up-icinga-lab.html)     
+[Part 02 --- Installing Icinga2](/guide/2020/11/30/installing-icinga.html)     
+[Part 03 --- Installing IcingaWeb2](/guide/2020/12/01/installing-icinga-web.html)      
+[Part 04 --- Establishing the Master Satellite Relationship](/guide/2020/12/03/establishing-master-satellite-relationship.html)     
+[Part 05 --- Addressing Design Flaws](/guide/2020/12/07/addressing-design-flaws.html)    
+[Part 06 --- Installing Icinga2 Director](/guide/2020/12/07/installing-icinga-director.html)  
+[Part 07 --- Adding Client Endpoints](guide/2020/12/08/adding-our-client-endpoints.html)    
+[Part 23 --- Summary](/guide/2020/12/11/icinga2-journey-summary.html)      
 
 # Establishing the Master Satellite Relationship
 
@@ -542,12 +542,12 @@ And on our Web UI we can see
 
 Most Excellent!!
 
-
+<br>
 ## Resources Used
-https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#master-setup
-https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#agentsatellite-setup
-https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#top-down
-https://community.icinga.com/t/understanding-log-duration/1679
+(https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#master-setup)[https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#master-setup]  
+(https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#agentsatellite-setup)[https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#agentsatellite-setup]  
+(https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#top-down)[https://icinga.com/docs/icinga-2/latest/doc/06-distributed-monitoring/#top-down]  
+(https://community.icinga.com/t/understanding-log-duration/1679)[https://community.icinga.com/t/understanding-log-duration/1679]  
 
 ## Special Mentions
 Roland Sommer and William van Beek on the Icinga community forms as they provided the critical information I needed to succeeded.

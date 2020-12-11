@@ -408,6 +408,6 @@ systemctl restart icinga2
   * Set the `Icinga2 Agent` to no if you are doing remote checks
 * Deploy your configuration
 
-
+<br>
 ## Special Mentions
 Roland Sommer and William van Beek on the Icinga community forms as they provided the critical information I needed to succeeded.

@@ -1,18 +1,3 @@
-# https://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
-# https://stackoverflow.com/questions/1248570/how-do-i-tell-git-to-ignore-everything-except-a-subdirectory
+# Don't really need this anymore ?
 
-# Ignore everything
-*
-
-# Do not ignore these files
-!.gitignore
-!LICENSE
-!README.md
-!*.html
-
-# or these folders
-!img
-!_posts
-!img/*
-!_posts/*
-
+todo.md

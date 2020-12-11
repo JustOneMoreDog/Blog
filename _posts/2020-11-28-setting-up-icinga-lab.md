@@ -90,6 +90,7 @@ Its important to draw out your environment and plan out how you want to setup yo
 #### Site C
 ![](/img/2020-11-28-setting-up-naigos-989b2.png)
 
+<br>
 ## Resources Used
 ESXI 6.7 Hypervisor
 

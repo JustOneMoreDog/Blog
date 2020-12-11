@@ -96,11 +96,12 @@ Confirmed Working!
    Active: active (running) since Thu 2020-12-03 18:25:31 UTC; 50s ago
 ```
 
+<br>
 ## Resources Used
-https://icinga.com/docs/icinga2/latest/doc/02-installation/
-https://computingforgeeks.com/how-to-install-icinga2-monitoring-tool-on-ubuntu-18-04-lts/
-https://www.howtoforge.com/how-to-install-icinga-2-monitoring-on-ubuntu-1804/
-https://gist.github.com/okv/2b0d9b6c1c73c036cabc
+https://icinga.com/docs/icinga2/latest/doc/02-installation/  
+https://computingforgeeks.com/how-to-install-icinga2-monitoring-tool-on-ubuntu-18-04-lts/  
+https://www.howtoforge.com/how-to-install-icinga-2-monitoring-on-ubuntu-1804/  
+https://gist.github.com/okv/2b0d9b6c1c73c036cabc  
 
 ## Special Mentions
 Roland Sommer and William van Beek on the Icinga community forms as they provided the critical information I needed to succeeded.
